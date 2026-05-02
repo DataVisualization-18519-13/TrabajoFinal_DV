@@ -219,3 +219,8 @@ data/raw/*
 # Python cache
 __pycache__/
 *.pyc
+# Outputs grandes (>10MB) — no versionar
+eda_output/reviews_lite.csv
+eda_output/businesses_enriched_geo.csv
+eda_output/*.png
+data/processed/
