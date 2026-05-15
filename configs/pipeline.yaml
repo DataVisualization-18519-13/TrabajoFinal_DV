@@ -1,0 +1,30 @@
+run:
+  output_root: outputs
+  storage_mode: local
+
+data:
+  raw_dir: data/raw
+  processed_dir: data/processed
+
+filters:
+  min_review_count: 5
+  only_open: true
+  coord_lat_min: 24.0
+  coord_lat_max: 72.0
+  coord_lon_min: -141.0
+  coord_lon_max: -52.0
+  min_category_businesses: 50
+
+features:
+  divergence_score: true
+  quadrant_norm_threshold: 0.5
+  log_review_count: true
+
+tableau:
+  export_csv: true
+  output_dir: outputs/gold
+
+gcp:
+  enabled: false
+  bucket: yelp-dv-grupo
+  prefix: runs
