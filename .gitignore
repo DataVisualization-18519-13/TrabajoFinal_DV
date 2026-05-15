@@ -224,3 +224,6 @@ eda_output/reviews_lite.csv
 eda_output/businesses_enriched_geo.csv
 eda_output/*.png
 data/processed/
+credentials/
+credentials/
+.env
