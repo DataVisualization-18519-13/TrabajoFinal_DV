@@ -1,9 +1,8 @@
 run:
   output_root: outputs
-  storage_mode: local
-
+  storage_mode: gcp
 data:
-  raw_dir: data/raw
+  raw_dir: C:/Users/joaqu/Desktop/UPCode/data_vis/data/raw/Yelp JSON
   processed_dir: data/processed
 
 filters:
