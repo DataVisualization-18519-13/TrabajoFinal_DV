@@ -48,6 +48,7 @@ def build_silver_categories(silver_biz: pd.DataFrame, cfg: PipelineConfig) -> pd
                 "review_count": row["review_count"],
                 "divergence":   row["divergence_score"],
                 "state":        row["state"],
+                "quadrant":     row["quadrant"],
             })
     cat_df = pd.DataFrame(rows)
     cat_agg = (
@@ -61,6 +62,10 @@ def build_silver_categories(silver_biz: pd.DataFrame, cfg: PipelineConfig) -> pd
         .reset_index()
     )
     result = cat_agg[cat_agg["n_negocios"] >= cfg.filters.min_category_businesses].copy()
+    n_op = cat_df[cat_df["quadrant"] == "High Q / Low Pop (Oportunidad)"].groupby("cat")["stars"].count().rename("n_oportunidad")
+    result = result.join(n_op, on="cat").fillna({"n_oportunidad": 0})
+    result["n_oportunidad"] = result["n_oportunidad"].astype(int)
+    result["pct_oportunidad"] = (result["n_oportunidad"] / result["n_negocios"] * 100).round(1)
     write_table(result, "silver", "categories", cfg)
     return result
 

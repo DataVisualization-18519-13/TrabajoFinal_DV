@@ -24,6 +24,6 @@ tableau:
   output_dir: outputs/gold
 
 gcp:
-  enabled: false
-  bucket: yelp-dv-grupo
+  enabled: true
+  bucket: yelp-dv-bucket
   prefix: runs
