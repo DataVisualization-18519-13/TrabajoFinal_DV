@@ -1,8 +1,8 @@
 run:
   output_root: outputs
-  storage_mode: gcp
+  storage_mode: local
 data:
-  raw_dir: C:/Users/joaqu/Desktop/UPCode/data_vis/data/raw/Yelp JSON
+  raw_dir: data/data_raw
   processed_dir: data/processed
 
 filters:
@@ -24,6 +24,6 @@ tableau:
   output_dir: outputs/gold
 
 gcp:
-  enabled: true
+  enabled: false
   bucket: yelp-dv-bucket
   prefix: runs

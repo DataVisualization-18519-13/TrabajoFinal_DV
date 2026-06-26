@@ -75,7 +75,7 @@ def write_table(df: pd.DataFrame, layer: str, name: str, cfg: PipelineConfig) ->
         bucket.blob(f"{layer}/{name}.csv").upload_from_string(
             csv_buf, content_type="text/csv"
         )
-        print(f"[{layer}] {name}: {len(df):,} filas → gs://{cfg.gcp.bucket}/{layer}/")
+        print(f"[{layer}] {name}: {len(df):,} filas -> gs://{cfg.gcp.bucket}/{layer}/")
     else:
         if layer == "bronze":
             out = cfg.bronze_dir
@@ -86,4 +86,4 @@ def write_table(df: pd.DataFrame, layer: str, name: str, cfg: PipelineConfig) ->
         out.mkdir(parents=True, exist_ok=True)
         df.to_parquet(out / f"{name}.parquet", index=False)
         df.to_csv(out / f"{name}.csv", index=False)
-        print(f"[{layer}] {name}: {len(df):,} filas → {out}")
+        print(f"[{layer}] {name}: {len(df):,} filas -> {out}")

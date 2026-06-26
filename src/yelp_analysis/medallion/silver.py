@@ -9,7 +9,7 @@ from yelp_analysis.storage import write_table
 def build_silver_business(bronze_biz: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
     df = bronze_biz.copy()
 
-    df["primary_category"] = (
+    df["first_listed_category"] = (
         df["categories"].fillna("").str.split(",").str[0].str.strip()
     )
     df["log_review_count"] = np.log1p(df["review_count"].astype(float))

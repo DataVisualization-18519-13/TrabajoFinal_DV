@@ -65,7 +65,7 @@ TrabajoFinal_DV/
     medallion/
       bronze.py            ← carga y normalización del dato crudo
       silver.py            ← features analíticas y métricas derivadas
-      gold.py              ← marts para Tableau
+      gold.py              ← modelo dimensional para Tableau
     pipeline/
       one_shot.py          ← orquestador: corre bronze → silver → gold
   configs/
@@ -97,7 +97,7 @@ TrabajoFinal_DV/
 | `log_rc_norm` | `(log_rc - min) / (max - min)` | Popularidad normalizada [0,1] |
 | `divergence_score` | `stars_norm - log_rc_norm` | Identifica joyas ocultas (alta calidad, baja visibilidad) |
 | `quadrant` | umbral 0.5 en ambos ejes | Segmento de oportunidad del negocio |
-| `primary_category` | primera etiqueta de `categories` | Segmentación simple en Tableau |
+| `first_listed_category` | primera etiqueta de `categories` | Orden original; no implica categoria principal |
 
 ---
 
@@ -177,12 +177,18 @@ python src/yelp_analysis/pipeline/one_shot.py
 [silver] categories:          687 filas → gs://yelp-dv-grupo/silver/
 [silver] monthly_reviews:     202 filas → gs://yelp-dv-grupo/silver/
 ── Gold ──
-[gold] businesses_enriched: 119,698 filas → gs://yelp-dv-grupo/gold/
-[gold] reviews_lite:        775,955 filas → gs://yelp-dv-grupo/gold/
-[gold] categories_agg:          687 filas → gs://yelp-dv-grupo/gold/
-[gold] monthly_reviews:         202 filas → gs://yelp-dv-grupo/gold/
+[gold] dim_business
+[gold] dim_date
+[gold] dim_category
+[gold] dim_opportunity_segment
+[gold] bridge_business_category
+[gold] fact_business_opportunity
+[gold] fact_review
 === PIPELINE COMPLETO ===
 ```
+
+La configuracion de relaciones, cardinalidades y medidas de Tableau se
+documenta en `docs/tableau_star_schema.md`.
 
 ---
 
